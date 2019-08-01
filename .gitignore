@@ -5,5 +5,5 @@
 /demo/target
 
 /autocode/target
-*.iml
 /*.iml
+*.iml
