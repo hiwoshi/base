@@ -3,7 +3,6 @@ package com.demo.base;
 import com.common.base.BaseController;
 import com.common.base.BasePO;
 import com.common.base.BaseService;
-import com.demo.entity.Students;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
