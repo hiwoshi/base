@@ -15,6 +15,15 @@ public class Field {
     /** Long */
     private String columnType;
 
+    /** 11 */
+    private int length;
+    /** 默认为false */
+    private boolean notNull = false;
+    /** 字段注释，啦啦啦啦 */
+    private String remark = "";
+
+
+
     public String getColumnName() {
         return columnName;
     }
@@ -63,5 +72,27 @@ public class Field {
         columnNameUp = str.substring(0,1).toUpperCase()+str.substring(1);
     }
 
+    public int getLength() {
+        return length;
+    }
 
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public boolean isNotNull() {
+        return notNull;
+    }
+
+    public void setNotNull(boolean notNull) {
+        this.notNull = notNull;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }
