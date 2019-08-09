@@ -1,6 +1,7 @@
 package com.common.process;
 
 import com.common.base.BasePO;
+import com.common.util.DateUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +14,7 @@ public class SqlHelper {
 
     @SuppressWarnings("unchecked")
     public static <T extends BasePO> String getInsertSql(T entity) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        initEntity(entity);
         Class c = entity.getClass();
         String tableName = getTableName(entity);
         Field[] fields = c.getDeclaredFields();
@@ -23,7 +25,7 @@ public class SqlHelper {
                 .append(tableName)
                 .append("(");
         values.append("values(");
-        for(int i = 0 ; i<fields1.length;i++){
+        for (int i = 0 ; i<fields1.length;i++){
             Field field = fields1[i];
             DemoColumn annotation = field.getAnnotation(DemoColumn.class);
             if(null != annotation && annotation.doInsert()){
@@ -32,7 +34,7 @@ public class SqlHelper {
                 values.append("'").append(c.getSuperclass().getDeclaredMethod(getMethodName).invoke(entity)).append("',");
             }
         }
-        for(int i = 0 ; i<fields.length;i++){
+        for (int i = 0 ; i<fields.length;i++){
             Field field = fields[i];
             DemoColumn annotation = field.getAnnotation(DemoColumn.class);
             if(null != annotation && annotation.doInsert()){
@@ -68,6 +70,13 @@ public class SqlHelper {
 
     private static <T extends BasePO> String getTableName(T entity){
         return entity.getClass().getAnnotation(DemoTable.class).value();
+    }
+
+    //初始化entity
+    private static  <T extends BasePO> void initEntity(T entity){
+        String now = DateUtil.getNow();
+        entity.setCreateTime(now);
+        entity.setUpdateTime(now);
     }
 
 }

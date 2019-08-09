@@ -15,14 +15,26 @@ public class Field {
     /** Long */
     private String columnType;
 
+    /** bigint */
+    private String sqlColumnName;
     /** 11 */
-    private int length;
+    private Integer length;
     /** 默认为false */
     private boolean notNull = false;
     /** 字段注释，啦啦啦啦 */
     private String remark = "";
 
+    public Field() {
+    }
 
+    public Field(String columnName, String columnType,String sqlColumnName, int length, boolean notNull, String remark) {
+        this.setColumnName(columnName);
+        this.columnType = columnType;
+        this.sqlColumnName = sqlColumnName;
+        this.length = length;
+        this.notNull = notNull;
+        this.remark = remark;
+    }
 
     public String getColumnName() {
         return columnName;
@@ -30,8 +42,8 @@ public class Field {
 
     public void setColumnName(String columnName) {
         this.columnName = columnName;
-        setColumnNameUp();
-        setColumnTableName();
+        columnTableName = StringUtils.changeToSqlStyle(columnName);
+        columnNameUp = StringUtils.firstCharUpper(columnName);
     }
 
     public String getColumnType() {
@@ -50,33 +62,11 @@ public class Field {
         return columnNameUp;
     }
 
-    /**
-     * 将驼峰转化为_表达式，默认对应数据库的列字段名
-     */
-    public void setColumnTableName(){
-        String str = columnName;
-        for (int i = 1; i < columnName.length(); i++) {
-            if(Character.isUpperCase(columnName.charAt(i))){
-                String s = columnName.charAt(i)+"";
-                str = str.replace(s,"_"+s);
-            }
-        }
-        columnTableName = str.toLowerCase();
-    }
-
-    /**
-     * 将驼峰转化为_表达式，默认对应数据库的列字段名
-     */
-    public void setColumnNameUp(){
-        String str = columnName;
-        columnNameUp = str.substring(0,1).toUpperCase()+str.substring(1);
-    }
-
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
@@ -94,5 +84,13 @@ public class Field {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getSqlColumnName() {
+        return sqlColumnName;
+    }
+
+    public void setSqlColumnName(String sqlColumnName) {
+        this.sqlColumnName = sqlColumnName;
     }
 }

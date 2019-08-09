@@ -2,6 +2,7 @@ package com.autocode;
 
 import com.autocode.base.WriteFile;
 import com.autocode.common.Common;
+import com.autocode.common.StringUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -26,12 +27,18 @@ import java.util.Map;
  */
 public class EnableAutocode {
 
+    /**
+     * 建表的主语句
+     * @param map {columns=[],className=""}
+     * @throws IOException
+     * @throws TemplateException
+     */
     public static void enableAutocode(Map map) throws IOException, TemplateException {
         //map 添加用户名，时间，package
         map.put("author", Common.getUserName());
         map.put("date", LocalDateTime.now().toString());
         map.put("package",Common.getPackage());
-        map.put("classNameLower",map.get("className").toString().toLowerCase());
+        map.put("classNameLower", StringUtils.changeToSqlStyle(map.get("className").toString()));
 
         Configuration configuration = new Configuration(Configuration.getVersion());
         // 指定configuration对象模板文件存放的路径

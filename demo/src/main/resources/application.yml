@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://112.74.161.146:3306/demo?characterEncoding=utf8&useSSL=true
     username: root
     password: root.root123
-    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
   thymeleaf:
     mode: HTML5
     encoding: UTF-8

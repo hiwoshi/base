@@ -12,20 +12,21 @@ import com.common.process.DemoTable;
 @DemoTable("${classNameLower}")
 public class ${className}PO extends BasePO {
 
-<#list columns as column>
-	@DemoColumn("${column.columnTableName}")
-	private ${column.columnType} ${column.columnName};
+<#list fields as field>
+	/** ${field.remark} */
+	@DemoColumn("${field.columnTableName}")
+	private ${field.columnType} ${field.columnName};
 
 </#list>
 	// setter and getter
 
-<#list columns as column>
-	public ${column.columnType} get${column.columnNameUp}(){
-		return ${column.columnName};
+<#list fields as field>
+	public ${field.columnType} get${field.columnNameUp}(){
+		return ${field.columnName};
 	}
 
-	public void set${column.columnNameUp}(${column.columnType} ${column.columnName}){
-		this.${column.columnName} = ${column.columnName};
+	public void set${field.columnNameUp}(${field.columnType} ${field.columnName}){
+		this.${field.columnName} = ${field.columnName};
 	}
 </#list>
 
