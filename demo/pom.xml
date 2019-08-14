@@ -84,7 +84,7 @@
         <!--  项目开发阶段引入，上线时移除  -->
         <dependency>
             <groupId>com.springbootbase</groupId>
-            <artifactId>autocode</artifactId>
+            <artifactId>code</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动生成代码工具</title>
+    <script src="autocode.js" type="application/javascript"></script>
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <th>表名</th>
+            <th><input type="text" min="0" onKeypress="return (/[a-zA-Z0-9]/.test(String.fromCharCode(event.keyCode)))" /></th>
+        </tr>
+    </table>
+    <input type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))">
+</body>
+</html>
