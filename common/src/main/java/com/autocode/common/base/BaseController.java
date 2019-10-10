@@ -11,4 +11,6 @@ public class BaseController<S extends BaseService,P extends BasePO> {
     @Autowired
     protected S service;
 
+
+
 }

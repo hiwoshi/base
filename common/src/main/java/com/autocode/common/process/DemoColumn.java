@@ -17,4 +17,6 @@ public @interface DemoColumn {
 
     boolean doInsert() default true;
 
+    SqlFactor factor() default SqlFactor.EQUALS;
+
 }

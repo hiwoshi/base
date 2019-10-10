@@ -1,6 +1,8 @@
 package com.autocode.common.process;
 
-import com.autocode.common.base.BasePO;
+import com.background.common.ReflectException;
+import com.background.common.base.BasePO;
+import com.background.common.base.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +21,9 @@ public class DaoMethod {
         try {
             str = SqlHelper.getInsertSql(entity);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            throw new ReflectException("parse sql error ,",e);
         }
-        logger.info("sql....[{}]",str);
+        logger.info("sql.insert...[{}]",str);
         return str;
     }
 
@@ -30,9 +32,29 @@ public class DaoMethod {
         try {
             str = SqlHelper.getDeleteSql(entity);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            throw new ReflectException("parse sql error ,",e);
         }
-        logger.info("sql....[{}]",str);
+        logger.info("sql.delete...[{}]",str);
+        return str;
+    }
+
+    public <T extends BasePO> String findAll(Class<T> entity){
+        String str = SqlHelper.findAll(entity);
+        logger.info("sql.findAll...[{}]",str);
+        return str;
+    }
+
+    public <T extends BasePO> String findByPage(T entity, Page page){
+        String str = null;
+        str = SqlHelper.findByPage(entity,page);
+        logger.info("sql.findByPage...[{}]",str);
+        return str;
+    }
+
+    public <T extends BasePO> String countByExample(T entity){
+        String str = null;
+        str = SqlHelper.countByExample(entity);
+        logger.info("sql.countByExample...[{}]",str);
         return str;
     }
 

@@ -1,16 +1,22 @@
 package com.autocode.common.base;
 
+
 import com.autocode.common.process.DemoColumn;
-import com.autocode.common.util.DateUtil;
+import lombok.Data;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : shenhao
  * @date : 2019/7/31 13:11
  */
-public class BasePO<T> {
+@Data
+public class BasePO {
 
-    @DemoColumn(value = "id",doInsert = false)
-    private Long id;
+    @DemoColumn(value = "id")
+    private String id;
 
     @DemoColumn("create_time")
     private String createTime;
@@ -27,55 +33,27 @@ public class BasePO<T> {
     @DemoColumn("remarks")
     private String remarks;
 
-    public Long getId() {
-        return id;
-    }
+    @DemoColumn("del_flag")
+    private String delFlag = "0";
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private List<String> sqlWhere;
 
-    //这里的赋值应该放在add方法里，后续需要改掉
-    public String getCreateTime() {
-        if(null == createTime) {
-            createTime = DateUtil.getNow();
+    private List<String> orderBy ;
+
+    public void sqlWhereAnd(String sql){
+        if (StringUtils.isEmpty(sql)) return;
+        if (null == sqlWhere){
+            sqlWhere = new ArrayList<>();
         }
-        return createTime;
+        sqlWhere.add(sql);
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void orderByAnd(String order){
+        if (StringUtils.isEmpty(order)) return;
+        if (null == orderBy){
+            orderBy = new ArrayList<>();
+        }
+        orderBy.add(order);
     }
 
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
 }
